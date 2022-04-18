@@ -55,7 +55,7 @@ class Exporter:
 
     def _config(self, fields):
         metrics = {}
-        labels = ['model', 'product_id']
+        labels = ['serial_number', 'product_id']
 
         for f in defs.FIELDS:
             label = f.label.replace('#', '')
@@ -78,17 +78,17 @@ class Exporter:
                 metrics[f.label] = prometheus_client.Enum(
                     name,
                     f.description,
-                    labelnames=['model', 'product_id'],
+                    labelnames=['serial_number', 'product_id'],
                     states=states)
                 metrics[f.label + '_value'] = prometheus_client.Gauge(
                     name + '_value',
                     f.description,
-                    labelnames=['model', 'product_id'])
+                    labelnames=['serial_number', 'product_id'])
             else:
                 metrics[f.label] = prometheus_client.Gauge(
                     name,
                     f.description,
-                    labelnames=['model', 'product_id'],
+                    labelnames=['serial_number', 'product_id'],
                     unit=unit)
 
         updated = prometheus_client.Gauge(
@@ -106,23 +106,25 @@ class Exporter:
         if self._metrics is None:
             self._metrics, self._updated, self._blocks = self._config(fields)
 
-        bmv = fields[defs.BMV.label]
-        #pid = fields[defs.PID.label]
-        self._updated.labels(bmv, pid).set(time.time())
-        self._blocks.labels(bmv, pid).inc()
+        ser = fields[defs.SER.label]
+        pid = fields[defs.PID.label]
+        self._updated.labels(ser, pid).set(time.time())
+        self._blocks.labels(ser, pid).inc()
 
         for label, value in fields.items():
             gauge = self._metrics[label]
             if isinstance(value, pint.Quantity):
                 f = self._filters.setdefault(label, Filter())
                 m = f.step(value.m)
-                gauge.labels(bmv, pid).set(round(m, 3))
+                gauge.labels(ser, pid).set(round(m, 3))
             elif isinstance(gauge, prometheus_client.Info):
-                gauge.labels(bmv, pid).info({label.lower().replace('#', ''): value})
+                gauge.labels(ser,
+                             pid).info({label.lower().replace('#', ''): value})
             elif isinstance(gauge, prometheus_client.Enum):
-                gauge.labels(bmv, pid).state(value.name.lower())
-                self._metrics[label + '_value'].labels(bmv, pid).set(value.value)
+                gauge.labels(ser, pid).state(value.name.lower())
+                self._metrics[label + '_value'].labels(ser,
+                                                       pid).set(value.value)
             elif isinstance(value, int):
-                gauge.labels(bmv, pid).set(value)
+                gauge.labels(ser, pid).set(value)
             else:
                 print(repr(value))

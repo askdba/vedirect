@@ -1,0 +1,16 @@
+README.md
+setup.py
+vedirect/__init__.py
+vedirect/cli.py
+vedirect/defs.py
+vedirect/mqtt.py
+vedirect/prometheus.py
+vedirect/test_text.py
+vedirect/text.py
+vedirect.egg-info/PKG-INFO
+vedirect.egg-info/SOURCES.txt
+vedirect.egg-info/dependency_links.txt
+vedirect.egg-info/entry_points.txt
+vedirect.egg-info/requires.txt
+vedirect.egg-info/top_level.txt
+vedirect.egg-info/zip-safe

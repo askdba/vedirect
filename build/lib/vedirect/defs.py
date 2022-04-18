@@ -121,7 +121,7 @@ _KINDS = {
     'CS': State,
     'MPPT': MPPTMode,
     'LOAD': Load,
-    'BMV': str,
+    'SER#': str,
     'PID': str,
     'FW': str,
 }
@@ -180,10 +180,11 @@ H22 = Field('H22', '0.01 kWh', 'Yield yesterday')
 H23 = Field('H23', 'W', 'Maximum power yesterday')
 ERR = Field('ERR', '', 'Error code')
 CS = Field('CS', '', 'State of operation')
+BMV = Field('BMV', '', 'Model description (deprecated)')
 FW = Field('FW', '', 'Firmware version (16 bit)')
 FWE = Field('FWE', '', 'Firmware version (24 bit)')
 PID = Field('PID', '', 'Product ID')
-BMV = Field('BMV', '', 'Model number')
+SER = Field('SER#', '', 'Serial number')
 HSDS = Field('HSDS', '', 'Day sequence number (0..364)')
 MODE = Field('MODE', '', 'Device mode')
 AC_OUT_V = Field('AC_OUT_V', '0.01 V', 'AC output voltage')
@@ -196,7 +197,7 @@ FIELDS = (
     # These fields have been tested.
     PID,
     FW,
-    BMV,
+    SER,
     V,
     I,
     VPV,
@@ -220,7 +221,6 @@ PIDS = {
     0x203: 'BMV-700',
     0x204: 'BMV-702',
     0x205: 'BMV-700H',
-    0xA381: 'BMV-712 Smart',
     0x0300: 'BlueSolar MPPT 70|15',
     0xA040: 'BlueSolar MPPT 75|50',
     0xA041: 'BlueSolar MPPT 150|35',

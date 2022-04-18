@@ -74,7 +74,7 @@ class Exporter:
                 retain=True)
 
     def export(self, fields: dict) -> None:
-        ser = fields[defs.BMV.label]
+        ser = fields[defs.SER.label]
         if self._last is None:
             self._config(ser, fields)
         elif (time.time() - self._last) < 60:

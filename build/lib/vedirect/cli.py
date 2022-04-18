@@ -15,7 +15,6 @@
 import click
 import prometheus_client
 import serial
-import time
 
 from . import mqtt
 from . import prometheus
