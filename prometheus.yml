@@ -26,3 +26,8 @@ scrape_configs:
       - targets: [
           '192.168.1.198:7090'
       ]
+  - job_name: 'vedirect_solar'
+    static_configs:
+      - targets: [
+          '192.168.1.198:7091'
+      ]
