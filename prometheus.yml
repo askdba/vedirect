@@ -7,27 +7,27 @@ scrape_configs:
   - job_name: 'prometheus'
     static_configs:
       - targets: [
-          '192.168.1.198:9090'
+          'localhost:9090'
       ]
 
   - job_name: 'node_exporter'
     static_configs:
       - targets: [
-          '192.168.1.198:9100'          
+          'localhost:9100'          
       ]
           
   - job_name: 'rpi_exporter'
     static_configs:
       - targets: [
-          '192.168.1.198:9243'
+          'localhost:9243'
       ]
   - job_name: 'vedirect'
     static_configs:
       - targets: [
-          '192.168.1.198:7090'
+          'localhost:7090'
       ]
-  - job_name: 'vedirect_solar'
+  - job_name: 'vedirect_mppt'
     static_configs:
       - targets: [
-          '192.168.1.198:7091'
+          'localhost:7091'
       ]

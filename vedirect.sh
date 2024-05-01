@@ -1,1 +1,2 @@
-vedirect --port=/dev/ttyUSB1 --prometheus_port=7090 
+#!/bin/bash
+vedirect --port=/dev/ttyUSB0 --prometheus_port=7090 
