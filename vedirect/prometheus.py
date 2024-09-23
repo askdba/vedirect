@@ -11,6 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 """Exports fields as Prometheus gauges and enums."""
 
 import logging
@@ -90,9 +91,13 @@ class Exporter:
         # Validate required fields before proceeding
         pid = fields.get('PID', 'unknown_pid')
         bmv = fields.get('BMV', 'unknown_bmv')
+
+        logging.debug(f"Fields received: {fields}")
+        logging.debug(f"PID: {pid}, BMV: {bmv}")
+
         if not pid or not bmv:
             logging.warning(f"Missing 'PID' or 'BMV' in fields: {fields}")
-        
+
         try:
             self._updated.labels(model=bmv, product_id=pid).set(time.time())
             self._blocks.labels(model=bmv, product_id=pid).inc()

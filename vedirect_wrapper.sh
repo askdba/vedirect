@@ -11,21 +11,22 @@ chmod +x "$script2"
 # Infinite loop
 while true
 do
-    # Execute script 1 (vedirect_mppt.sh)
+    # Execute script 1 (vedirect_mppt.sh) for 1 minutes
     echo "Running vedirect_mppt.sh"
-    "$script1"
+    timeout 60 "$script1"
     echo "Finished running vedirect_mppt.sh"
 
-    # Wait for 5 minutes
-    echo "Waiting for 5 minutes before running next script..."
-    sleep 30
+    # Wait for 30 seconds
+    echo "Waiting for  5 seconds before running the next script..."
+    sleep 5
 
-    # Execute script 2 (vedirect.sh)
+    # Execute script 2 (vedirect.sh) for 2 minutes
     echo "Running vedirect.sh"
-    "$script2"
+    timeout 60 "$script2"
     echo "Finished running vedirect.sh"
 
-    # Wait for 5 minutes
-    echo "Waiting for 5 minutes before restarting the cycle..."
-    sleep 300
+    # Wait for 5 seconds
+    echo "Waiting for 5 seconds before restarting the cycle..."
+    sleep 5
 done
+
